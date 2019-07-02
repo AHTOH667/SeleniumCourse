@@ -6,8 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SeleniumCourse" />
+        <module name="SeleniumCourseTest" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SeleniumCourseBase" target="1.5" />
+      <module name="SeleniumTest" target="1.5" />
+      <module name="src.maim.java." target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

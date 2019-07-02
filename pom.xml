@@ -6,13 +6,17 @@
 
     <groupId>SeleniumCourse</groupId>
     <artifactId>SeleniumCourse</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>SeleniumCourseTest</module>
+    </modules>
 
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>4.0.0-alpha-2</version>
         </dependency>
     </dependencies>
 </project>
