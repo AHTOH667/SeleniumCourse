@@ -1,8 +1,13 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import java.io.File;
+
+
 public class LoginTest {
 
 
@@ -13,7 +18,9 @@ public class LoginTest {
         if (driver != null) {
             return;
         }
-        driver = new ChromeDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.setBinary(new FirefoxBinary(new File("C:\\Program Files\\Firefox Nightly\\firefox.exe")));
+        driver = new FirefoxDriver(options);
         driver.get("http://localhost/litecart/admin/login.php");
     }
 
