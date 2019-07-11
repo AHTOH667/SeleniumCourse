@@ -1,6 +1,10 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import java.util.List;
 
 
 public class TestBase {
@@ -11,15 +15,22 @@ public class TestBase {
     }
 
     public static WebDriver driver;
-    
 
-    public void start() {
+
+    public void startAdminka() {
         if (driver != null) {
             return;
         }
         driver = new ChromeDriver();
         driver.get("http://localhost/litecart/admin/login.php");
+    }
 
+    public void startLitecart() {
+        if (driver != null) {
+            return;
+        }
+        driver = new ChromeDriver();
+        driver.get("http://localhost/litecart/en/");
     }
 
     public void login() {
@@ -28,10 +39,25 @@ public class TestBase {
         driver.findElement(By.name("login")).click();
     }
 
-
-
     public void clickOnLeftRail(By locator) {
         driver.findElement(locator).click();
+    }
+
+    public void checkStickers(String idBox) {
+        WebElement box = driver.findElement(By.id(idBox));
+        List<WebElement> elements = box.findElements(By.tagName("li"));
+        for (int i = 0; i < elements.size(); i++) {
+            Assert.assertTrue(isChildDisplayed(elements.get(i), "new")
+                    || isChildDisplayed(elements.get(i), "sale"));
+        }
+    }
+
+    private boolean isChildDisplayed(WebElement element, String cssClass) {
+        try {
+            return element.findElement(By.className(cssClass)).isDisplayed();
+        } catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public void quit() {

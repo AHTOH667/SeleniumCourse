@@ -14,7 +14,7 @@ public class SectionsOfAdmin {
 
     @BeforeMethod
     public void before() {
-        test.start();
+        test.startAdminka();
         test.login();
     }
 
