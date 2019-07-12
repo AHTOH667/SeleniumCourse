@@ -10,12 +10,11 @@ import java.util.List;
 public class TestBase {
 
 
+    public static WebDriver driver;
+
     public static WebDriver getDriver() {
         return driver;
     }
-
-    public static WebDriver driver;
-
 
     public void startAdminka() {
         if (driver != null) {

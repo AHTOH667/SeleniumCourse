@@ -18,6 +18,7 @@ public class SectionsOfAdmin {
         test.login();
     }
 
+
     @Test
     public void sectionsOfAdmin() {
         //Appearence
@@ -218,9 +219,9 @@ public class SectionsOfAdmin {
         }
     }
 
+
     @AfterMethod
     public void after() {
         test.quit();
     }
-
 }

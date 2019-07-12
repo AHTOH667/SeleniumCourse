@@ -13,6 +13,7 @@ public class CheckStickers {
         test.startLitecart();
     }
 
+
     @Test
     public void test() {
         test.checkStickers("box-most-popular");
