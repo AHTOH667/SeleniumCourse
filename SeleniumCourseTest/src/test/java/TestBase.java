@@ -38,6 +38,31 @@ public class TestBase {
         driver.findElement(By.name("login")).click();
     }
 
+    public void leftRail() {
+        List<WebElement> elements = driver.findElements(By.id("app-"));
+        System.out.println(elements.size());
+        for (int i = 0; i < elements.size(); i++) {
+            elements.get(i).click();
+            elements = driver.findElements(By.id("app-"));
+            List<WebElement> miniBox = elements.get(i).findElements(By.tagName("li"));
+            for (int j = 0; j < miniBox.size(); j++) {
+                miniBox.get(j).click();
+                Assert.assertTrue(isElementPresent(driver, By.tagName("h1")));
+                elements = driver.findElements(By.id("app-"));
+                miniBox = elements.get(i).findElements(By.tagName("li"));
+            }
+        }
+    }
+
+    public static boolean isElementPresent(WebDriver driver, By locator) {
+        try {
+            driver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
     public void clickOnLeftRail(By locator) {
         driver.findElement(locator).click();
     }
