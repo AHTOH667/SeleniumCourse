@@ -109,12 +109,12 @@ public class TestBase {
                 rows.get(i).findElement(By.xpath("./td[5]/a")).click();
                 WebElement table2 = driver.findElement(By.className("dataTable"));
                 List<WebElement> names3 = table2.findElements(By.cssSelector("td[name^='zones']"));
-                List<String> namesIn = names3.stream()
+                List<String> namesZone1 = names3.stream()
                         .map(WebElement::getText)
                         .collect(Collectors.toList());
-                List<String> namesIn2 = namesIn;
-                Collections.sort(namesIn);
-                Assert.assertEquals(namesIn2, namesIn);
+                List<String> namesZone2 = namesZone1;
+                Collections.sort(namesZone1);
+                Assert.assertEquals(namesZone2, namesZone1);
                 clickOnLeftRail(By.xpath(".//span[contains(.,'Countries')]"));
                 table = driver.findElement(By.className("dataTable"));
                 rows = table.findElements(By.className("row"));
