@@ -20,6 +20,8 @@ public class CheckCountriesList {
     @Test
     public void checkCountriesList() {
         test.clickOnLeftRail(By.xpath(".//span[contains(.,'Countries')]"));
+        test.countriesList();
+        test.zonesList();
     }
 
 

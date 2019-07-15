@@ -4,7 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class TestBase {
@@ -40,7 +44,6 @@ public class TestBase {
 
     public void leftRail() {
         List<WebElement> elements = driver.findElements(By.id("app-"));
-        System.out.println(elements.size());
         for (int i = 0; i < elements.size(); i++) {
             elements.get(i).click();
             elements = driver.findElements(By.id("app-"));
@@ -87,8 +90,35 @@ public class TestBase {
     public void countriesList () {
         WebElement table = driver.findElement(By.className("dataTable"));
         List<WebElement> rows = table.findElements(By.className("row"));
+        List<String> names1 = new ArrayList<>();
+        List<String> names2 = new ArrayList<>();
         for (int i = 0; i < rows.size(); i++) {
-            List<WebElement> name1 = table.findElements(By.xpath("./td[5]/a"));
+            names1.add(rows.get(i).findElement(By.xpath("./td[5]/a")).getText());
+            names2.add(rows.get(i).findElement(By.xpath("./td[5]/a")).getText());
+        }
+        Collections.sort(names1);
+        Assert.assertEquals(names2, names1);
+    }
+
+    public void zonesList () {
+        WebElement table = driver.findElement(By.className("dataTable"));
+        List<WebElement> rows = table.findElements(By.className("row"));
+        for (int i = 0; i < rows.size(); i++) {
+            String zones = rows.get(i).findElement(By.xpath("./td[6]")).getText();
+            if (!zones.equals("0")) {
+                rows.get(i).findElement(By.xpath("./td[5]/a")).click();
+                WebElement table2 = driver.findElement(By.className("dataTable"));
+                List<WebElement> names3 = table2.findElements(By.cssSelector("td[name^='zones']"));
+                List<String> namesIn = names3.stream()
+                        .map(WebElement::getText)
+                        .collect(Collectors.toList());
+                List<String> namesIn2 = namesIn;
+                Collections.sort(namesIn);
+                Assert.assertEquals(namesIn2, namesIn);
+                clickOnLeftRail(By.xpath(".//span[contains(.,'Countries')]"));
+                table = driver.findElement(By.className("dataTable"));
+                rows = table.findElements(By.className("row"));
+            }
         }
     }
 
