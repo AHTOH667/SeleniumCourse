@@ -46,8 +46,8 @@ public class TestBase {
         WebElement box = driver.findElement(By.id(idBox));
         List<WebElement> elements = box.findElements(By.tagName("li"));
         for (int i = 0; i < elements.size(); i++) {
-            Assert.assertTrue(isChildDisplayed(elements.get(i), "new")
-                    || isChildDisplayed(elements.get(i), "sale"));
+            Assert.assertTrue(isChildDisplayed(elements.get(i), "sticker"));
+                    //|| isChildDisplayed(elements.get(i), "sale"));
         }
     }
 
@@ -56,6 +56,14 @@ public class TestBase {
             return element.findElement(By.className(cssClass)).isDisplayed();
         } catch (NoSuchElementException e){
             return false;
+        }
+    }
+
+    public void countriesList () {
+        WebElement table = driver.findElement(By.className("dataTable"));
+        List<WebElement> rows = table.findElements(By.className("row"));
+        for (int i = 0; i < rows.size(); i++) {
+            List<WebElement> name1 = table.findElements(By.xpath("./td[5]/a"));
         }
     }
 
