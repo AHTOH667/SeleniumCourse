@@ -1,5 +1,7 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +23,8 @@ public class TestBase {
             return;
         }
         driver = new ChromeDriver();
+        //driver = new FirefoxDriver();
+        //driver = new InternetExplorerDriver();
         driver.get("http://localhost/litecart/admin/login.php");
     }
 
@@ -29,6 +33,8 @@ public class TestBase {
             return;
         }
         driver = new ChromeDriver();
+        //driver = new FirefoxDriver();
+        //driver = new InternetExplorerDriver();
         driver.get("http://localhost/litecart/en/");
     }
 
