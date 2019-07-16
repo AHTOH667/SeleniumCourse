@@ -1,10 +1,6 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -120,6 +116,60 @@ public class TestBase {
                 rows = table.findElements(By.className("row"));
             }
         }
+    }
+
+    public void elementsOfGoods() {
+        WebElement box = driver.findElement(By.id("box-campaigns"));
+        List<WebElement> goods = box.findElements(By.tagName("li"));
+        for (int i = 0; i < goods.size(); i++) {
+            String title = goods.get(i).findElement(By.className("name")).getText();
+            String fullPrice = goods.get(i).findElement(By.className("regular-price")).getText();
+            String salePrice = goods.get(i).findElement(By.className("campaign-price")).getText();
+            checkGrayColors(goods.get(i), By.className("regular-price"));
+            checkRedColors(goods.get(i), By.className("campaign-price"));
+            checkStylePrice(goods.get(i), By.className("regular-price"), "S");
+            checkStylePrice(goods.get(i), By.className("campaign-price"), "STRONG");
+            checkSizeOfElements(goods.get(i), By.className("regular-price"), By.className("campaign-price"));
+
+            goods.get(i).click();
+            Assert.assertEquals(title, driver.findElement(By.tagName("h1")).getText());
+            WebElement info = driver.findElement(By.className("information"));
+            Assert.assertEquals(fullPrice, info.findElement(By.cssSelector(".regular-price")).getText());
+            Assert.assertEquals(salePrice, info.findElement(By.cssSelector(".campaign-price")).getText());
+            checkGrayColors(info, By.cssSelector(".regular-price"));
+            checkRedColors(info, By.cssSelector(".campaign-price"));
+            checkStylePrice(info, By.className("regular-price"), "S");
+            checkStylePrice(info, By.className("campaign-price"), "STRONG");
+            checkSizeOfElements(info, By.className("regular-price"), By.className("campaign-price"));
+        }
+    }
+
+    public void checkGrayColors(WebElement element, By locator) {
+        String colorValues[] = checkColors(element, locator);
+        Assert.assertEquals(colorValues[1], colorValues[2], colorValues[0]);
+    }
+
+    public void checkRedColors (WebElement element, By locator) {
+        String colorValues[] = checkColors(element, locator);
+        Assert.assertEquals(colorValues[1],colorValues[2], "0");
+    }
+
+    public String[] checkColors(WebElement element, By locator) {
+        String color = element.findElement(locator).getCssValue("color");
+        String[] colorValues = color.replace("rgba(", "")
+                .replace(")", "")
+                .split(", ");
+        return colorValues;
+    }
+
+    public void checkStylePrice(WebElement element, By locator, String value) {
+        Assert.assertEquals(element.findElement(locator).getAttribute("tagName"), value);
+    }
+
+    public void checkSizeOfElements(WebElement element, By locator, By locator2) {
+        Dimension sizeFull = element.findElement(locator).getSize();
+        Dimension sizeSale = element.findElement(locator2).getSize();
+        Assert.assertTrue(sizeSale.getHeight() > sizeFull.getHeight() && sizeSale.getWidth() > sizeFull.getWidth());
     }
 
     public void quit() {
