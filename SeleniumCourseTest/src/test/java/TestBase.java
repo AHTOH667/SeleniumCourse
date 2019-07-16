@@ -141,6 +141,10 @@ public class TestBase {
             checkStylePrice(info, By.className("regular-price"), "S");
             checkStylePrice(info, By.className("campaign-price"), "STRONG");
             checkSizeOfElements(info, By.className("regular-price"), By.className("campaign-price"));
+
+            driver.get("http://localhost/litecart/en/");
+            box = driver.findElement(By.id("box-campaigns"));
+            goods = box.findElements(By.tagName("li"));
         }
     }
 
