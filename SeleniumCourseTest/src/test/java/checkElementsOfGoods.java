@@ -13,6 +13,7 @@ public class checkElementsOfGoods {
         test.startLitecart();
     }
 
+
     @Test
     public void checkElements() {
         test.elementsOfGoods();

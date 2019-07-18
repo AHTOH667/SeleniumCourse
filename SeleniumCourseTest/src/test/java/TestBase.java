@@ -2,6 +2,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -180,6 +182,17 @@ public class TestBase {
         Dimension sizeFull = element.findElement(locator).getSize();
         Dimension sizeSale = element.findElement(locator2).getSize();
         Assert.assertTrue(sizeSale.getHeight() > sizeFull.getHeight() && sizeSale.getWidth() > sizeFull.getWidth());
+    }
+
+    public void typeFields(WebDriver driver, By locator, String value) {
+        driver.findElement(locator).sendKeys(value);
+    }
+
+    public void passwordAndCreate(WebDriver driver) {
+
+        typeFields(driver, By.name("password"), "password");
+        typeFields(driver, By.name("confirmed_password"), "password");
+        driver.findElement(By.name("create_account")).click();
     }
 
     public void quit() {
