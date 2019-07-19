@@ -1,7 +1,5 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -124,7 +122,7 @@ public class TestBase {
         }
     }
 
-    public void elementsOfGoods(WebDriver driver, List<WebElement> goods, WebElement box) {
+    public void elementsOfGoods(WebDriver driver, List<WebElement> goods) {
         for (int i = 0; i < goods.size(); i++) {
             String title = goods.get(i).findElement(By.className("name")).getText();
             String fullPrice = goods.get(i).findElement(By.className("regular-price")).getText();
@@ -147,7 +145,7 @@ public class TestBase {
             checkSizeOfElements(info, By.className("regular-price"), By.className("campaign-price"));
 
             driver.get("http://localhost/litecart/en/");
-            box = driver.findElement(By.id("box-campaigns"));
+            WebElement box = driver.findElement(By.id("box-campaigns"));
             goods = box.findElements(By.tagName("li"));
         }
     }

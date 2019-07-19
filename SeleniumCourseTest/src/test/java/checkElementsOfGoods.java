@@ -22,7 +22,7 @@ public class checkElementsOfGoods {
     public void checkElements() {
         WebElement box = TestBase.driver.findElement(By.id("box-campaigns"));
         List<WebElement> goods = box.findElements(By.tagName("li"));
-        test.elementsOfGoods(TestBase.driver, goods, box);
+        test.elementsOfGoods(TestBase.driver, goods);
     }
 
 
