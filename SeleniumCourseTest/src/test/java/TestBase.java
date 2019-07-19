@@ -2,8 +2,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,9 +124,7 @@ public class TestBase {
         }
     }
 
-    public void elementsOfGoods() {
-        WebElement box = driver.findElement(By.id("box-campaigns"));
-        List<WebElement> goods = box.findElements(By.tagName("li"));
+    public void elementsOfGoods(WebDriver driver, List<WebElement> goods, WebElement box) {
         for (int i = 0; i < goods.size(); i++) {
             String title = goods.get(i).findElement(By.className("name")).getText();
             String fullPrice = goods.get(i).findElement(By.className("regular-price")).getText();
@@ -194,6 +190,13 @@ public class TestBase {
         typeFields(driver, By.name("confirmed_password"), "password");
         driver.findElement(By.name("create_account")).click();
     }
+
+    /*public void setDatepicker(WebDriver driver, String cssSelector, String date) {
+        new WebDriverWait(driver, 30000).until(
+                (WebDriver d) -> d.findElement(By.cssSelector(cssSelector)).isDisplayed());
+        JavascriptExecutor.class.cast(driver).executeScript(
+                String.format("$('%s').datepicker('setDate', '%s')", cssSelector, date));
+    }*/
 
     public void quit() {
         driver.quit();

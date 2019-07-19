@@ -1,6 +1,10 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 
 public class checkElementsOfGoods {
@@ -16,7 +20,9 @@ public class checkElementsOfGoods {
 
     @Test
     public void checkElements() {
-        test.elementsOfGoods();
+        WebElement box = TestBase.driver.findElement(By.id("box-campaigns"));
+        List<WebElement> goods = box.findElements(By.tagName("li"));
+        test.elementsOfGoods(TestBase.driver, goods, box);
     }
 
 
