@@ -4,6 +4,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
@@ -34,6 +35,16 @@ public class TestBase {
         //driver = new FirefoxDriver();
         //driver = new InternetExplorerDriver();
         driver.get("http://localhost/litecart/en/");
+    }
+
+    public void startLitecartFallback() {
+        if (driver != null) {
+            return;
+        }
+        driver = new ChromeDriver();
+        //driver = new FirefoxDriver();
+        //driver = new InternetExplorerDriver();
+        driver.get("http://litecart.stqa.ru/en/");
     }
 
     public void login() {
@@ -195,6 +206,15 @@ public class TestBase {
         JavascriptExecutor.class.cast(driver).executeScript(
                 String.format("$('%s').datepicker('setDate', '%s')", cssSelector, date));
     }*/
+
+    public boolean isElementNotPresent(WebDriver driver, By locator, int size) {
+        try {
+            driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
+            return driver.findElements(locator).size() == size;
+        } finally {
+            driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
+        }
+    }
 
     public void quit() {
         driver.quit();
