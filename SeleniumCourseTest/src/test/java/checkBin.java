@@ -31,7 +31,6 @@ public class checkBin {
                 Select select = new Select(size);
                 select.selectByVisibleText("Small");
             }
-            //String cartBefore = TestBase.driver.findElement(By.className("quantity")).getText();
             TestBase.driver.findElement(By.name("add_cart_product")).click();
             int finalI = i;
             wait.until(d -> Integer.parseInt(d.findElement(By.className("quantity")).getText()) != finalI);
