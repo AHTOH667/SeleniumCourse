@@ -5,6 +5,7 @@ import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -208,13 +209,14 @@ public class TestBase {
                 String.format("$('%s').datepicker('setDate', '%s')", cssSelector, date));
     }*/
 
-    public boolean isElementNotPresent(WebDriver driver, By locator, int size) {
-        try {
-            driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
-            return driver.findElements(locator).size() == size;
-        } finally {
-            driver.manage().timeouts().implicitlyWait(30000, TimeUnit.MILLISECONDS);
-        }
+    public ExpectedCondition<String> anyWindowOtherThan(Set<String> oldWindows) {
+        return new ExpectedCondition<String>() {
+            public String apply(WebDriver driver) {
+                Set<String> handles = driver.getWindowHandles();
+                handles.removeAll(oldWindows);
+                return handles.size() > 0 ? handles.iterator().next() : null;
+            }
+        };
     }
 
     public void quit() {
