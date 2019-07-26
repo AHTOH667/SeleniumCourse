@@ -34,13 +34,6 @@ public class checkBin {
             String cartBefore = TestBase.driver.findElement(By.className("quantity")).getText();
             TestBase.driver.findElement(By.name("add_cart_product")).click();
             wait.until(invisibilityOfElementWithText(By.className("quantity"), cartBefore));
-            /*try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            String cartAfter = TestBase.driver.findElement(By.className("quantity")).getText();
-            assertTrue(cartBefore != cartAfter);*/
             if (i < 2) {
                 TestBase.driver.findElement(By.id("logotype-wrapper")).click();
             }
