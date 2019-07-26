@@ -9,7 +9,7 @@ import java.util.List;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
-public class checkBin {
+public class CheckBin {
 
 
     private TestBase test = new TestBase();

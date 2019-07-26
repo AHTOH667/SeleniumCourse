@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class checkGeoZones {
+public class CheckGeoZones {
 
 
     private TestBase test = new TestBase();

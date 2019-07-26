@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public class checkExternalLinks {
+public class CheckExternalLinks {
 
 
     private TestBase test = new TestBase();

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 
-public class checkElementsOfGoods {
+public class CheckElementsOfGoods {
 
 
     private TestBase test = new TestBase();
