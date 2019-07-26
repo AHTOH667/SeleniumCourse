@@ -1,11 +1,12 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.util.List;
-import static org.testng.Assert.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 
 public class checkBin {
@@ -21,6 +22,7 @@ public class checkBin {
 
     @Test
     public void test() {
+        WebDriverWait wait = new WebDriverWait(TestBase.driver, 30);
         for (int i = 0; i < 3; i++) {
             WebElement box = TestBase.driver.findElement(By.id("box-most-popular"));
             box.findElement(By.tagName("li")).click();
@@ -31,14 +33,17 @@ public class checkBin {
             }
             String cartBefore = TestBase.driver.findElement(By.className("quantity")).getText();
             TestBase.driver.findElement(By.name("add_cart_product")).click();
-            try {
+            wait.until(invisibilityOfElementWithText(By.className("quantity"), cartBefore));
+            /*try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             String cartAfter = TestBase.driver.findElement(By.className("quantity")).getText();
-            assertTrue(cartBefore != cartAfter);
-            TestBase.driver.findElement(By.id("logotype-wrapper")).click();
+            assertTrue(cartBefore != cartAfter);*/
+            if (i < 2) {
+                TestBase.driver.findElement(By.id("logotype-wrapper")).click();
+            }
         }
         TestBase.driver.findElement(By.id("cart-wrapper")).click();
         List<WebElement> goods;
@@ -52,15 +57,14 @@ public class checkBin {
             removeButton = TestBase.driver.findElements(By.name("remove_cart_item"));
             System.out.println("Button = " + removeButton.size());
             for (int i = 0; i < removeButton.size(); i++) {
+                WebElement order = TestBase.driver.findElement(By.className("dataTable"));
+                List<WebElement> rows = order.findElements(By.className("item"));
+                int numberOfRows = rows.size();
                 if (removeButton.get(i).isDisplayed()) {
                     removeButton.get(i).click();
+                    wait.until(numberOfElementsToBeLessThan(By.cssSelector(".dataTable .item"), numberOfRows));
                     break;
                 }
-            }
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
