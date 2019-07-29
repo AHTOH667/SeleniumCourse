@@ -50,10 +50,10 @@ public class CheckBin {
             removeButton = TestBase.driver.findElements(By.name("remove_cart_item"));
             System.out.println("Button = " + removeButton.size());
             for (int i = 0; i < removeButton.size(); i++) {
-                WebElement order = TestBase.driver.findElement(By.className("dataTable"));
-                List<WebElement> rows = order.findElements(By.className("item"));
-                int numberOfRows = rows.size();
                 if (removeButton.get(i).isDisplayed()) {
+                    WebElement order = TestBase.driver.findElement(By.className("dataTable"));
+                    List<WebElement> rows = order.findElements(By.className("item"));
+                    int numberOfRows = rows.size();
                     removeButton.get(i).click();
                     wait.until(numberOfElementsToBeLessThan(By.cssSelector(".dataTable .item"), numberOfRows));
                     break;
