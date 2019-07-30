@@ -46,10 +46,13 @@ public class TestBase {
         if (driver != null) {
             return;
         }
+        //Capabilities for the logs
         DesiredCapabilities cap = new DesiredCapabilities();
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
         cap.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+
+
         driver = new EventFiringWebDriver(new ChromeDriver(cap));
         //driver = new EventFiringWebDriver(new FirefoxDriver());
         //driver = new EventFiringWebDriver(new InternetExplorerDriver());
