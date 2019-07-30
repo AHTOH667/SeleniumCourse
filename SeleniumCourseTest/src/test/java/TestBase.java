@@ -1,30 +1,59 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 
 public class TestBase {
 
 
-    public static WebDriver driver;
+    public static EventFiringWebDriver driver;
 
-    public static WebDriver getDriver() {
+    public static EventFiringWebDriver getDriver() {
         return driver;
+    }
+
+    public static class MyListener extends AbstractWebDriverEventListener {
+        @Override
+        public void beforeFindBy(By by, WebElement element, WebDriver driver) {
+            System.out.println(by);
+        }
+
+        @Override
+        public void afterFindBy(By by, WebElement element, WebDriver driver) {
+            System.out.println(by + " found");
+        }
+
+        @Override
+        public void onException(Throwable throwable, WebDriver driver) {
+            System.out.println(throwable);
+        }
     }
 
     public void startAdminka() {
         if (driver != null) {
             return;
         }
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        //driver = new InternetExplorerDriver();
+        DesiredCapabilities cap = new DesiredCapabilities();
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
+        cap.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+        driver = new EventFiringWebDriver(new ChromeDriver(cap));
+        //driver = new EventFiringWebDriver(new FirefoxDriver());
+        //driver = new EventFiringWebDriver(new InternetExplorerDriver());
+        driver.register(new MyListener());
         driver.get("http://localhost/litecart/admin/login.php");
     }
 
@@ -32,9 +61,10 @@ public class TestBase {
         if (driver != null) {
             return;
         }
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        //driver = new InternetExplorerDriver();
+        driver = new EventFiringWebDriver(new ChromeDriver());
+        //driver = new EventFiringWebDriver(new FirefoxDriver());
+        //driver = new EventFiringWebDriver(new InternetExplorerDriver());
+        //driver.register(new MyListener());
         driver.get("http://localhost/litecart/en/");
     }
 
@@ -42,9 +72,10 @@ public class TestBase {
         if (driver != null) {
             return;
         }
-        driver = new ChromeDriver();
-        //driver = new FirefoxDriver();
-        //driver = new InternetExplorerDriver();
+        driver = new EventFiringWebDriver(new ChromeDriver());
+        //driver = new EventFiringWebDriver(new FirefoxDriver());
+        //driver = new EventFiringWebDriver(new InternetExplorerDriver());
+        //driver.register(new MyListener());
         driver.get("http://litecart.stqa.ru/en/");
     }
 
