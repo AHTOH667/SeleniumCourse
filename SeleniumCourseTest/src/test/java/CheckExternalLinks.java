@@ -27,10 +27,10 @@ public class CheckExternalLinks {
         TestBase.driver.findElement(By.className("fa-pencil")).click();
         WebElement element = TestBase.driver.findElement(By.cssSelector("[method=post]"));
         List <WebElement> links = element.findElements(By.cssSelector("[target=_blank]"));
-        for (int i = 0; i < links.size(); i++) {
+        for (WebElement link : links) {
             String oldWindow = TestBase.driver.getWindowHandle();
             Set<String> allOldWindows = TestBase.driver.getWindowHandles();
-            links.get(i).click();
+            link.click();
             String newWindow = wait.until(test.anyWindowOtherThan(allOldWindows));
             TestBase.driver.switchTo().window(newWindow);
             TestBase.driver.close();

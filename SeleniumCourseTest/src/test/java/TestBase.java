@@ -229,7 +229,6 @@ public class TestBase {
     }
 
     public void passwordAndCreate(WebDriver driver) {
-
         typeFields(driver, By.name("password"), "password");
         typeFields(driver, By.name("confirmed_password"), "password");
         driver.findElement(By.name("create_account")).click();
@@ -242,6 +241,7 @@ public class TestBase {
                 String.format("$('%s').datepicker('setDate', '%s')", cssSelector, date));
     }*/
 
+    //It is used on the waiting for new window
     public ExpectedCondition<String> anyWindowOtherThan(Set<String> oldWindows) {
         return new ExpectedCondition<String>() {
             public String apply(WebDriver driver) {
