@@ -9,7 +9,6 @@ public class CheckCountriesList {
 
     private TestBase test = new TestBase();
 
-
     @BeforeMethod
     public void before() {
         test.startAdminka();

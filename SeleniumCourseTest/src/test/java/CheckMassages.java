@@ -3,7 +3,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 
@@ -33,7 +32,7 @@ public class CheckMassages {
         }
     }
 
-    public List<WebElement> followToCatalog() {
+    private List<WebElement> followToCatalog() {
         test.clickOnLeftRail(By.xpath(".//span[contains(.,'Catalog')]"));
         TestBase.driver.findElement(By.xpath(".//a[contains(text(),'Rubber Ducks')]")).click();
         TestBase.driver.findElement(By.xpath(".//a[contains(text(),'Subcategory')]")).click();

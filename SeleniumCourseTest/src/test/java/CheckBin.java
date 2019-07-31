@@ -49,9 +49,9 @@ public class CheckBin {
             }
             removeButton = TestBase.driver.findElements(By.name("remove_cart_item"));
             System.out.println("Button = " + removeButton.size());
-            for (int i = 0; i < removeButton.size(); i++) {
-                if (removeButton.get(i).isDisplayed()) {
-                    removeButton.get(i).click();
+            for (WebElement webElement : removeButton) {
+                if (webElement.isDisplayed()) {
+                    webElement.click();
                     WebElement order = TestBase.driver.findElement(By.className("dataTable"));
                     List<WebElement> rows = order.findElements(By.className("item"));
                     int numberOfRows = rows.size();

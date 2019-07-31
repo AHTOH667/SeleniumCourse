@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class TestBase {
 
 
-    public static EventFiringWebDriver driver;
+    static EventFiringWebDriver driver;
 
     public static EventFiringWebDriver getDriver() {
         return driver;
@@ -103,7 +103,7 @@ public class TestBase {
         }
     }
 
-    public static boolean isElementPresent(WebDriver driver, By locator) {
+    public boolean isElementPresent(WebDriver driver, By locator) {
         try {
             driver.findElement(locator);
             return true;
@@ -119,15 +119,15 @@ public class TestBase {
     public void checkStickers(String idBox) {
         WebElement box = driver.findElement(By.id(idBox));
         List<WebElement> elements = box.findElements(By.tagName("li"));
-        for (int i = 0; i < elements.size(); i++) {
-            Assert.assertTrue(isChildDisplayed(elements.get(i), "sticker"));
-                    //|| isChildDisplayed(elements.get(i), "sale"));
+        for (WebElement element : elements) {
+            Assert.assertTrue(isChildDisplayed(element));
+            //|| isChildDisplayed(elements.get(i), "sale"));
         }
     }
 
-    private boolean isChildDisplayed(WebElement element, String cssClass) {
+    private boolean isChildDisplayed(WebElement element) {
         try {
-            return element.findElement(By.className(cssClass)).isDisplayed();
+            return element.findElement(By.className("sticker")).isDisplayed();
         } catch (NoSuchElementException e){
             return false;
         }
@@ -138,9 +138,9 @@ public class TestBase {
         List<WebElement> rows = table.findElements(By.className("row"));
         List<String> names1 = new ArrayList<>();
         List<String> names2 = new ArrayList<>();
-        for (int i = 0; i < rows.size(); i++) {
-            names1.add(rows.get(i).findElement(By.xpath("./td[5]/a")).getText());
-            names2.add(rows.get(i).findElement(By.xpath("./td[5]/a")).getText());
+        for (WebElement row : rows) {
+            names1.add(row.findElement(By.xpath("./td[5]/a")).getText());
+            names2.add(row.findElement(By.xpath("./td[5]/a")).getText());
         }
         Collections.sort(names1);
         Assert.assertEquals(names2, names1);
