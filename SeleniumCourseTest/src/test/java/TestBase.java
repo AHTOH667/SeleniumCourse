@@ -254,5 +254,8 @@ public class TestBase {
 
     public void quit() {
         driver.quit();
+
+        //It is used for get Version for the WebDriver
+        //System.out.println(driver.getCapabilities().getVersion());
     }
 }
