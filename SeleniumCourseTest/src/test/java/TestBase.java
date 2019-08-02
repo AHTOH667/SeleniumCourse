@@ -71,17 +71,6 @@ public class TestBase {
         driver.get("http://localhost/litecart/en/");
     }
 
-    public void startLitecartFallback() {
-        if (driver != null) {
-            return;
-        }
-        driver = new EventFiringWebDriver(new ChromeDriver());
-        //driver = new EventFiringWebDriver(new FirefoxDriver());
-        //driver = new EventFiringWebDriver(new InternetExplorerDriver());
-        //driver.register(new MyListener());
-        driver.get("http://litecart.stqa.ru/en/");
-    }
-
     public void login() {
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
