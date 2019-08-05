@@ -1,4 +1,4 @@
-package CheckBinTest;
+package CheckBinTest.Data;
 
 
 public class TestData {

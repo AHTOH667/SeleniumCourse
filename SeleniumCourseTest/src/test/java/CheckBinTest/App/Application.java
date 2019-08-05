@@ -1,4 +1,8 @@
-package CheckBinTest;
+package CheckBinTest.App;
+import CheckBinTest.Pages.BinPage;
+import CheckBinTest.Pages.GoodsPage;
+import CheckBinTest.Pages.HomePage;
+import CheckBinTest.Data.TestData;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
