@@ -1,5 +1,4 @@
 package CheckBinTest;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -10,7 +9,6 @@ public class Application {
 
 
     private TestData data;
-    private TestBaseForBin test;
     private HomePage homePage;
     private GoodsPage goodsPage;
     private BinPage bin;
@@ -20,7 +18,6 @@ public class Application {
     public Application() {
         driver = new EventFiringWebDriver(new ChromeDriver());
         data = new TestData();
-        test = new TestBaseForBin();
         homePage = new HomePage(driver);
         goodsPage = new GoodsPage(driver);
         bin = new BinPage(driver);
@@ -50,11 +47,7 @@ public class Application {
     }
 
     public void removeAllGoods() {
-        bin.followToBinPage();
-        while (! test.isElementPresent(
-                driver, By.xpath(".//em[contains(text(),'There are no items in your cart.')]"))) {
-            bin.stopCarousel().removeAll();
-        }
+        bin.followToBinPage().removeAllButton();
     }
 
     public void quit() {
