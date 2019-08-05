@@ -42,8 +42,7 @@ public class Application {
     public void addGoodsInBin() {
         for (int i = 0; i < data.numberOfGoods; i++) {
             homePage.selectFirstDuck();
-            goodsPage.selectSmallSize();
-            goodsPage.addToCart(i);
+            goodsPage.selectSmallSize().addToCart(i);
             if (i < data.numberOfGoods - 1) {
                 homePage.open();
             }
@@ -54,8 +53,7 @@ public class Application {
         bin.followToBinPage();
         while (! test.isElementPresent(
                 driver, By.xpath(".//em[contains(text(),'There are no items in your cart.')]"))) {
-            bin.stopCarousel();
-            bin.removeAll();
+            bin.stopCarousel().removeAll();
         }
     }
 

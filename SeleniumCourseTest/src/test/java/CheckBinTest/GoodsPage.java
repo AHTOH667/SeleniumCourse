@@ -14,12 +14,13 @@ public class GoodsPage extends Page {
 
     private TestBaseForBin test = new TestBaseForBin();
 
-    public void selectSmallSize() {
+    public GoodsPage selectSmallSize() {
         if (test.isElementPresent(driver, By.name("options[Size]"))) {
             WebElement size = driver.findElement(By.name("options[Size]"));
             Select select = new Select(size);
             select.selectByVisibleText("Small");
         }
+        return this;
     }
 
     public void addToCart(int finalI) {

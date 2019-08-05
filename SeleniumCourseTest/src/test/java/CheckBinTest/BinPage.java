@@ -16,13 +16,14 @@ public class BinPage extends Page {
         driver.findElement(By.id("cart-wrapper")).click();
     }
 
-    public void stopCarousel() {
+    public BinPage stopCarousel() {
         List<WebElement> goods;
         goods = driver.findElements(By.xpath(".//li[contains(@class, 'shortcut')]"));
         System.out.println("goods = " + goods.size());
         if (goods.size() > 0) {
             goods.get(0).click();
         }
+        return this;
     }
 
     public void removeAll() {
