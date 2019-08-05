@@ -2,7 +2,6 @@ package CheckBinTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 public class TestBaseForBin {
@@ -20,18 +19,6 @@ public class TestBaseForBin {
         return wait;
     }
 
-    public void startLitecartFallback() {
-        if (driver != null) {
-            return;
-        }
-        driver = new EventFiringWebDriver(new ChromeDriver());
-        wait = new WebDriverWait(driver, 30);
-        //driver = new EventFiringWebDriver(new FirefoxDriver());
-        //driver = new EventFiringWebDriver(new InternetExplorerDriver());
-        //driver.register(new MyListener());
-        driver.get("http://litecart.stqa.ru/en/");
-    }
-
     public boolean isElementPresent(WebDriver driver, By locator) {
         try {
             driver.findElement(locator);
@@ -40,12 +27,4 @@ public class TestBaseForBin {
             return false;
         }
     }
-
-    public void quit() {
-        driver.quit();
-
-        //It is used for get Version for the WebDriver
-        //System.out.println(driver.getCapabilities().getVersion());
-    }
-
 }
